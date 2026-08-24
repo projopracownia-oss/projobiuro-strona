@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kontakt — Umów Rozmowę o Projekcie | PROJO Jarosław</title>
+<meta name="description" content="Skontaktuj się z biurem projektowym PROJO w Jarosławiu. Zapytaj o wycenę projektu, analizy działki lub pozwolenia na budowę.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@600;700;800;900&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#fbf7ee; --paper:#f5efe0; --ink:#211c16; --ink-soft:rgba(33,28,22,0.64);
+    --gold:#3d1a00; --yellow:#ffcc00; --line:rgba(33,28,22,0.13);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--cream); color:var(--ink); font-family:'Poppins',sans-serif; line-height:1.7; font-size:16px;}
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 40px;}
+  h1,h2,h3{font-family:'League Spartan',sans-serif; font-weight:800; line-height:1.08; letter-spacing:-0.01em;}
+  .eyebrow{font-size:11.5px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-soft);}
+
+  header{position:sticky; top:0; z-index:50; background:rgba(251,247,238,0.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+  .header-inner{display:flex; align-items:center; justify-content:space-between; padding:14px 0;}
+  .brand-block{display:flex; align-items:center; gap:12px;}
+  .brand-block .logo-mark{height:44px; width:auto; flex-shrink:0;}
+  .brand-block .brand-name{font-family:'League Spartan',sans-serif; font-weight:800; font-size:14.5px; display:block;}
+  .brand-block .brand-contact{font-size:11.5px; color:var(--ink-soft); display:block;}
+  nav ul{list-style:none; display:flex; gap:34px;}
+  nav a{font-size:14px; font-weight:500; color:var(--ink-soft); padding-bottom:3px; border-bottom:2px solid transparent; transition:border-color .15s ease;}
+  nav a:hover{color:var(--ink); border-bottom-color:var(--yellow);}
+  .btn{display:inline-flex; align-items:center; gap:8px; font-size:14px; font-weight:600; padding:13px 26px; border-radius:100px; transition:all .15s ease;}
+  .btn-fill{background:var(--ink); color:var(--cream);}
+  .btn-fill:hover{background:#3a3024;}
+
+  .page-hero{padding:64px 0 48px;}
+  .page-hero .eyebrow{display:inline-block; background:var(--yellow); color:var(--ink); padding:5px 12px; border-radius:100px; margin-bottom:16px;}
+  .page-hero h1{font-size:clamp(32px,4.4vw,50px); max-width:700px;}
+  .page-hero p{color:var(--ink-soft); font-size:16.5px; max-width:560px; margin-top:20px;}
+
+  section{padding:0 0 90px;}
+  .contact-grid{display:grid; grid-template-columns:0.85fr 1.15fr; gap:40px; align-items:stretch;}
+  .info-card, .form-card{display:flex; flex-direction:column;}
+
+  .info-card{background:var(--paper); border-radius:6px; padding:40px;}
+  .info-card .pin-graphic{margin-bottom:26px;}
+  .info-card h3{font-size:19px; margin-bottom:20px;}
+  .info-row{padding:14px 0; border-top:1px solid var(--line); font-size:14.5px;}
+  .info-row:first-of-type{border-top:none;}
+  .info-row b{display:block; font-size:11.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-soft); margin-bottom:4px;}
+  .social-row{display:flex; gap:14px; margin-top:22px;}
+  .social-row a{width:38px; height:38px; border:1.5px solid var(--ink); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700;}
+  .social-row a:hover{background:var(--ink); color:var(--cream);}
+
+  .form-card{background:var(--paper); border-radius:6px; padding:40px;}
+  .form-card h3{font-size:19px; margin-bottom:6px;}
+  .form-card > p{color:var(--ink-soft); font-size:14.5px; margin-bottom:28px;}
+  .form-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .field{margin-bottom:18px;}
+  .field.full{grid-column:1/-1;}
+  .field label{display:block; font-size:13px; font-weight:600; margin-bottom:7px;}
+  .field input, .field select, .field textarea{
+    width:100%; border:1.5px solid var(--line); border-radius:4px; padding:12px 14px;
+    font-family:'Poppins',sans-serif; font-size:14.5px; background:var(--cream); color:var(--ink);
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{outline:none; border-color:var(--yellow);}
+  .field textarea{resize:vertical; min-height:110px;}
+  .form-submit{margin-top:8px;}
+
+  footer{border-top:1px solid var(--line); padding:56px 0 40px;}
+  .foot-grid{display:flex; justify-content:space-between; flex-wrap:wrap; gap:32px; margin-bottom:36px;}
+  .foot-brand{font-family:'League Spartan',sans-serif; font-weight:800; font-size:18px; margin-bottom:10px;}
+  .foot-col p, .foot-col a{font-size:14px; color:var(--ink-soft); display:block; margin-bottom:8px;}
+  .foot-col h4{font-size:12.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-soft); margin-bottom:14px;}
+  .foot-bottom{display:flex; justify-content:space-between; padding-top:24px; border-top:1px solid var(--line); font-size:12.5px; color:var(--ink-soft); flex-wrap:wrap; gap:8px;}
+
+  @media (max-width:900px){
+    nav{display:none;}
+    .contact-grid{grid-template-columns:1fr;}
+    .form-grid{grid-template-columns:1fr;}
+  }
+</style>
+<style>
+  .fade-in{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
+  .fade-in.in-view{opacity:1; transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){ .fade-in{opacity:1; transform:none; transition:none;} }
+</style>
+
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <a href="index.html" class="brand-block">
+      <img class="logo-mark" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfQAAAH0CAYAAADL1t+KAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAE32lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSfvu78nIGlkPSdXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQnPz4KPHg6eG1wbWV0YSB4bWxuczp4PSdhZG9iZTpuczptZXRhLyc+CjxyZGY6UkRGIHhtbG5zOnJkZj0naHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyc+CgogPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9JycKICB4bWxuczpBdHRyaWI9J2h0dHA6Ly9ucy5hdHRyaWJ1dGlvbi5jb20vYWRzLzEuMC8nPgogIDxBdHRyaWI6QWRzPgogICA8cmRmOlNlcT4KICAgIDxyZGY6bGkgcmRmOnBhcnNlVHlwZT0nUmVzb3VyY2UnPgogICAgIDxBdHRyaWI6Q3JlYXRlZD4yMDI1LTEwLTAzPC9BdHRyaWI6Q3JlYXRlZD4KICAgICA8QXR0cmliOkV4dElkPjg1Y2U1YTQwLTA5ZjEtNDg4Ni04OGI1LWJhMTU4NjYzZTQzYjwvQXR0cmliOkV4dElkPgogICAgIDxBdHRyaWI6RmJJZD41MjUyNjU5MTQxNzk1ODA8L0F0dHJpYjpGYklkPgogICAgIDxBdHRyaWI6VG91Y2hUeXBlPjI8L0F0dHJpYjpUb3VjaFR5cGU+CiAgICA8L3JkZjpsaT4KICAgPC9yZGY6U2VxPgogIDwvQXR0cmliOkFkcz4KIDwvcmRmOkRlc2NyaXB0aW9uPgoKIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PScnCiAgeG1sbnM6ZGM9J2h0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvJz4KICA8ZGM6dGl0bGU+CiAgIDxyZGY6QWx0PgogICAgPHJkZjpsaSB4bWw6bGFuZz0neC1kZWZhdWx0Jz5QUk9KTyAtIDE8L3JkZjpsaT4KICAgPC9yZGY6QWx0PgogIDwvZGM6dGl0bGU+CiA8L3JkZjpEZXNjcmlwdGlvbj4KCiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91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" alt="PROJO">
+      <span class="brand-text">
+        <span class="brand-name">PROJO JOWITA URBAN</span>
+        <span class="brand-contact">(+48) 782 017 279 · kontakt@projobiuro.pl</span>
+      </span>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="uslugi.html">Usługi</a></li>
+        <li><a href="analiza-dzialki.html">Sklep usług</a></li>
+        <li><a href="realizacje.html">Realizacje</a></li>
+        <li><a href="o-mnie.html">O mnie</a></li>
+      </ul>
+    </nav>
+    <a href="kontakt.html" class="btn" style="background:var(--yellow); color:var(--ink);">Zapytaj o wycenę</a>
+  </div>
+</header>
+
+<main>
+
+  <section style="padding-bottom:56px;">
+    <div class="wrap page-hero" style="padding:64px 0 0;">
+      <span class="eyebrow">Kontakt</span>
+      <h1>Napisz do mnie — odpowiadam osobiście</h1>
+      <p>Opisz krótko swoją sytuację i to, czego potrzebujesz. Odzywam się zwykle tego samego dnia roboczego.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap contact-grid">
+      <div class="info-card">
+        <svg class="pin-graphic" viewBox="0 0 400 130" style="width:100%; height:auto;">
+          <path d="M0 100 Q100 70 180 95 T400 80" stroke="var(--line)" stroke-width="2" fill="none"/>
+          <path d="M20 40 Q140 90 260 30 T400 50" stroke="var(--line)" stroke-width="2" fill="none"/>
+          <circle cx="90" cy="30" r="5" fill="var(--ink)" opacity="0.35"/>
+          <circle cx="330" cy="95" r="5" fill="var(--ink)" opacity="0.35"/>
+          <text x="90" y="20" text-anchor="middle" font-family="Poppins, sans-serif" font-size="11" fill="var(--ink)" opacity="0.6">Przemyśl</text>
+          <text x="330" y="115" text-anchor="middle" font-family="Poppins, sans-serif" font-size="11" fill="var(--ink)" opacity="0.6">Jarosław</text>
+          <g transform="translate(210,58)">
+            <path d="M0 -34C15 -34 26 -23 26 -9C26 8 0 34 0 34C0 34 -26 8 -26 -9C-26 -23 -15 -34 0 -34Z" fill="var(--yellow)" stroke="var(--ink)" stroke-width="2.4" stroke-linejoin="round"/>
+            <circle cx="0" cy="-9" r="8" fill="var(--cream)" stroke="var(--ink)" stroke-width="2"/>
+          </g>
+        </svg>
+        <h3>PROJO Jowita Urban</h3>
+        <div class="info-row"><b>E-mail</b>kontakt@projobiuro.pl</div>
+        <div class="info-row"><b>Telefon</b>(+48) 782 017 279</div>
+        <div class="info-row"><b>Adres korespondencyjny</b>os. Piłsudskiego 13/21, 37-500 Jarosław</div>
+        <div class="info-row"><b>Siedziba biura</b>Średnia 44, 37-755 Średnia</div>
+        <div class="info-row"><b>Obszar działania</b>Jarosław, Przemyśl, Przeworsk, cała Polska zdalnie</div>
+        <div class="info-row"><b>NIP / REGON</b>7922122531 · 524997967</div>
+        <div class="info-row"><b>Adres do Doręczeń Elektronicznych</b>AE:PL-28844-22797-RIFAA-22</div>
+        <div class="social-row">
+          <a href="https://www.instagram.com/projo.urbanjowita/" aria-label="Instagram">IG</a>
+          <a href="https://www.facebook.com/profile.php?id=100091988857720" aria-label="Facebook">FB</a>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <h3>Opisz swój projekt</h3>
+        <p>Im więcej szczegółów, tym szybciej i konkretniej odpowiem.</p>
+        <form action="https://formsubmit.co/kontakt@projobiuro.pl" method="POST">
+          <input type="hidden" name="_subject" value="Nowe zapytanie ze strony kontaktowej">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="https://projobiuro.pl/dziekujemy-kontakt.html">
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+          <div class="form-grid">
+            <div class="field"><label>Imię i nazwisko *</label><input type="text" name="Imię i nazwisko" required></div>
+            <div class="field"><label>Telefon</label><input type="tel" name="Telefon"></div>
+            <div class="field full"><label>E-mail *</label><input type="email" name="email" required></div>
+            <div class="field full">
+              <label>Czego dotyczy zapytanie? *</label>
+              <select name="Czego dotyczy" required>
+                <option value="">Wybierz</option>
+                <option>Sprawdź działkę</option>
+                <option>Projekt indywidualny</option>
+                <option>Adaptacja projektu gotowego</option>
+                <option>Przebudowa / rozbudowa</option>
+                <option>Pozwolenie na budowę</option>
+                <option>Inne</option>
+              </select>
+            </div>
+            <div class="field full"><label>Lokalizacja działki / inwestycji</label><input type="text" name="Lokalizacja" placeholder="Miejscowość, gmina"></div>
+            <div class="field full"><label>Opis zapytania *</label><textarea name="Opis zapytania" required placeholder="Napisz kilka słów o swojej działce, budynku lub planach."></textarea></div>
+          </div>
+          <div class="form-submit">
+            <button type="submit" class="btn btn-fill">Wyślij zapytanie →</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="foot-brand">PROJO</div>
+        <p style="max-width:260px;">Biuro projektowe Jowity Urban. Jarosław, Przemyśl, Przeworsk i cała Polska — pełen zakres współpracy zdalnie.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Kontakt</h4>
+        <a href="mailto:kontakt@projobiuro.pl">kontakt@projobiuro.pl</a>
+        <a href="tel:+48782017279">(+48) 782 017 279</a>
+        <p>Biuro: Średnia 44, 37-755 Średnia</p>
+        <p style="font-size:12px; opacity:0.85;">Adres rejestrowy: os. Piłsudskiego 13/21, 37-500 Jarosław</p>
+        <p style="font-size:12px; opacity:0.85;">Adres do Doręczeń Elektronicznych: AE:PL-28844-22797-RIFAA-22</p>
+      </div>
+      <div class="foot-col">
+        <h4>Biuro</h4>
+        <a href="uslugi.html">Usługi</a>
+        <a href="analiza-dzialki.html">Sklep usług</a>
+        <a href="realizacje.html">Realizacje</a>
+        <a href="o-mnie.html">O mnie</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>PROJO Jowita Urban · NIP 7922122531 · REGON 524997967</span>
+      <span style="display:flex; gap:18px; align-items:center;">
+        <a href="polityka-prywatnosci.html" style="text-decoration:underline;">Polityka prywatności</a>
+        <a href="regulamin.html" style="text-decoration:underline;">Regulamin</a>
+        <span>© 2026 PROJO</span>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('section, .pkg, .step, .micro, .opinie-item').forEach(el=>el.classList.add('fade-in'));
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); } });
+  }, {threshold:0.12});
+  document.querySelectorAll('.fade-in').forEach(el=>io.observe(el));
+
+  document.querySelectorAll('.hero-stats b, .about-photo + .about-text b').forEach(()=>{});
+  function animateCount(el){
+    const raw = el.textContent.trim();
+    const match = raw.match(/^([\d\s]+)(.*)$/);
+    if(!match) return;
+    const target = parseInt(match[1].replace(/\s/g,''),10);
+    const suffix = match[2];
+    if(isNaN(target)) return;
+    let start = 0; const dur = 900; const startTime = performance.now();
+    function tick(now){
+      const p = Math.min((now-startTime)/dur, 1);
+      const val = Math.floor(p*target);
+      el.textContent = val + suffix;
+      if(p<1) requestAnimationFrame(tick); else el.textContent = target + suffix;
+    }
+    requestAnimationFrame(tick);
+  }
+  const statEls = document.querySelectorAll('.hero-stats b');
+  const statIo = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ animateCount(e.target); statIo.unobserve(e.target); } });
+  }, {threshold:0.5});
+  statEls.forEach(el=>statIo.observe(el));
+</script>
+
+</body>
+</html>
