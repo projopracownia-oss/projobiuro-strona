@@ -12,17 +12,19 @@ exports.handler = async (event) => {
 
   try {
     const notification = JSON.parse(event.body);
-    const { merchantId, posId, sessionId, amount, currency, orderId, sign } = notification;
+    const { merchantId, posId, sessionId, amount, originAmount, currency, orderId, methodId, statement, sign } = notification;
 
     const crc = process.env.P24_CRC;
     const apiKey = process.env.P24_API_KEY;
 
+    // Podpis przychodzącego powiadomienia P24 liczony jest z: sessionId, orderId, amount, currency, crc
     const expectedSign = crypto
       .createHash('sha384')
-      .update(JSON.stringify({ merchantId, posId, sessionId, amount, currency, crc }))
+      .update(JSON.stringify({ sessionId, orderId, amount, currency, crc }))
       .digest('hex');
 
     if (sign !== expectedSign) {
+      console.error('P24 sign mismatch. Received:', JSON.stringify(notification), 'Expected sign:', expectedSign);
       return { statusCode: 400, body: 'Nieprawidłowy podpis powiadomienia.' };
     }
 
