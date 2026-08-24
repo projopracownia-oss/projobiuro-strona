@@ -176,7 +176,7 @@
             const payRes = await fetch('/.netlify/functions/create-payment', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ amountZl: '1', description: 'TEST — Szybki Skan Działki (cena testowa)', email, name })
+              body: JSON.stringify({ amountZl: '249', description: 'Szybki Skan Działki', email, name })
             });
             let payData = null;
             try { payData = await payRes.json(); } catch (jsonErr) { payData = null; }
