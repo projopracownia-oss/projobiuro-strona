@@ -178,8 +178,13 @@
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ amountZl: '249', description: 'Szybki Skan Działki', email, name })
             });
-            const payData = await payRes.json();
-            if (!payRes.ok || !payData.url) throw new Error('Zgłoszenie zostało wysłane, ale płatność online jest chwilowo niedostępna. Odezwę się z linkiem do zapłaty mailowo.');
+            let payData = null;
+            try { payData = await payRes.json(); } catch (jsonErr) { payData = null; }
+            if (!payRes.ok || !payData || !payData.url) {
+              const detail = payData && payData.details ? JSON.stringify(payData.details) : (payData && payData.error ? payData.error : ('status ' + payRes.status));
+              alert('BŁĄD PŁATNOŚCI (do wysłania Claude): ' + detail);
+              return;
+            }
 
             window.location.href = payData.url;
           } catch (err) {

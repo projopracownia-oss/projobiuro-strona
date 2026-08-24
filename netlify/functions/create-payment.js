@@ -67,6 +67,7 @@ exports.handler = async (event) => {
     const data = await p24res.json();
 
     if (!p24res.ok || !data.data || !data.data.token) {
+      console.error('P24 register failed:', p24res.status, JSON.stringify(data));
       return {
         statusCode: 502,
         body: JSON.stringify({ error: 'Przelewy24 odrzuciło rejestrację płatności.', details: data }),
