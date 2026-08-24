@@ -43,6 +43,8 @@ exports.handler = async (event) => {
     });
 
     if (!verifyRes.ok) {
+      const errBody = await verifyRes.text();
+      console.error('P24 verify failed:', verifyRes.status, errBody);
       return { statusCode: 502, body: 'Nie udało się potwierdzić transakcji w Przelewy24.' };
     }
 

@@ -48,7 +48,7 @@ exports.handler = async (event) => {
       client: name || '',
       country: 'PL',
       language: 'pl',
-      urlReturn: siteUrl + '/dziekujemy.html',
+      urlReturn: siteUrl + '/8-dziekujemy.html',
       urlStatus: siteUrl + '/.netlify/functions/payment-status',
       sign,
     };
