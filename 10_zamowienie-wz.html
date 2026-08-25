@@ -129,18 +129,48 @@
           <input type="hidden" name="_next" value="https://projobiuro.pl/8-dziekujemy.html">
           <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
 
+          <p style="font-size:13px; color:var(--ink-soft); margin:0 0 16px;">Ceny poniżej dotyczą <b>jednego budynku na wniosku</b>. Jeśli na tej samej działce/wniosku ma powstać więcej budynków, dolicz je w kalkulatorze niżej.</p>
+
           <div class="service-select">
             <label class="service-pick">
-              <input type="radio" name="Wariant" value="500 zł — inwestor dostarcza zapewnienia" id="wariant-500" checked>
+              <input type="radio" name="Wariant" value="500 zł — budynek mieszkalny/gospodarczy do 200 m², inwestor dostarcza zapewnienia" id="wariant-500" data-base="500" checked>
               <b>500 zł</b>
-              <span>Ty dostarczasz zapewnienia od gestorów sieci</span>
+              <span>Budynek mieszkalny lub gospodarczy (do 200 m²) — Ty dostarczasz zapewnienia od gestorów sieci</span>
             </label>
             <label class="service-pick">
-              <input type="radio" name="Wariant" value="1000 zł — PROJO zbiera zapewnienia" id="wariant-1000">
+              <input type="radio" name="Wariant" value="1000 zł — budynek mieszkalny/gospodarczy do 200 m², PROJO zbiera zapewnienia" id="wariant-1000" data-base="1000">
               <b>1000 zł</b>
-              <span>Ja zbieram zapewnienia od gestorów sieci</span>
+              <span>Budynek mieszkalny lub gospodarczy (do 200 m²) — ja zbieram zapewnienia od gestorów sieci</span>
+            </label>
+            <label class="service-pick">
+              <input type="radio" name="Wariant" value="1000 zł — budynek usługowy/handlowy/przemysłowy/biurowy, bez zapewnień" id="wariant-uslug-1000" data-base="1000">
+              <b>1000 zł</b>
+              <span>Budynek usługowy, handlowy, przemysłowy lub biurowy — bez zapewnień na start</span>
+            </label>
+            <label class="service-pick">
+              <input type="radio" name="Wariant" value="1500 zł — budynek usługowy/handlowy/przemysłowy/biurowy, z zapewnieniami" id="wariant-uslug-1500" data-base="1500">
+              <b>1500 zł</b>
+              <span>Budynek usługowy, handlowy, przemysłowy lub biurowy — z zapewnieniami od startu</span>
             </label>
           </div>
+
+          <div class="form-grid-2" style="margin-top:16px;">
+            <div class="field">
+              <label>Dodatkowe budynki mieszkalne/gospodarcze na tym wniosku (do 120 m² każdy)</label>
+              <input type="number" name="Dodatkowe budynki mieszkalne" id="extraMieszk" min="0" value="0" style="max-width:120px;">
+              <p style="font-size:12px; color:var(--ink-soft); margin-top:4px;">+250 zł za każdy</p>
+            </div>
+            <div class="field">
+              <label>Dodatkowe obiekty usługowe/handlowe/przemysłowe/biurowe na tym wniosku</label>
+              <input type="number" name="Dodatkowe obiekty usługowe" id="extraUslug" min="0" value="0" style="max-width:120px;">
+              <p style="font-size:12px; color:var(--ink-soft); margin-top:4px;">+500 zł za każdy</p>
+            </div>
+          </div>
+
+          <div id="priceTotal" style="background:var(--cream); border:1px solid var(--line); border-radius:14px; padding:14px 18px; margin:16px 0 10px; font-weight:700; font-size:17px;">
+            Razem: <span id="priceTotalValue">500 zł</span>
+          </div>
+
           <p style="font-size:13px; color:var(--ink-soft); margin:10px 0 24px;">Niezależnie od wariantu: jeśli podpiszesz mi pełnomocnictwo, sama składam dokumenty i prowadzę sprawę w urzędzie. Bez pełnomocnictwa dostajesz gotowe dokumenty i składasz je samodzielnie.</p>
 
           <div class="form-grid-2">
@@ -152,9 +182,9 @@
           <div class="field"><label>Krótki opis inwestycji (opcjonalnie)</label><textarea name="Opis inwestycji" placeholder="Co chcesz tu postawić, orientacyjna wielkość itp."></textarea></div>
 
           <div class="field">
-            <label>Zapewnienia od gestorów sieci (jeśli już masz — wariant 500 zł)</label>
+            <label>Zapewnienia od gestorów sieci (jeśli już masz)</label>
             <input type="file" name="Zapewnienia_gestorow" accept=".pdf,.jpg,.jpeg,.png">
-            <p style="font-size:12.5px; color:var(--ink-soft); margin-top:6px;">Wymagane tylko przy wariancie 500 zł. Przy wariancie 1000 zł zostaw puste — to ja je zbieram.</p>
+            <p style="font-size:12.5px; color:var(--ink-soft); margin-top:6px;">Wymagane tylko przy wariantach 500 zł i 1000 zł (usługowy, bez zapewnień). Przy wariantach, w których to ja zbieram zapewnienia, zostaw puste.</p>
           </div>
 
           <div class="field"><label>Dodatkowe załączniki (opcjonalnie)</label><input type="file" name="Dodatkowe załączniki" accept=".pdf,.jpg,.jpeg,.png"></div>
@@ -175,6 +205,20 @@
         </form>
 
         <script>
+        function calcTotal() {
+          const checked = document.querySelector('input[name="Wariant"]:checked');
+          const base = checked ? parseInt(checked.getAttribute('data-base'), 10) : 0;
+          const extraMieszk = parseInt(document.getElementById('extraMieszk').value, 10) || 0;
+          const extraUslug = parseInt(document.getElementById('extraUslug').value, 10) || 0;
+          const total = base + (extraMieszk * 250) + (extraUslug * 500);
+          document.getElementById('priceTotalValue').textContent = total + ' zł';
+          return total;
+        }
+        document.querySelectorAll('input[name="Wariant"]').forEach(r => r.addEventListener('change', calcTotal));
+        document.getElementById('extraMieszk').addEventListener('input', calcTotal);
+        document.getElementById('extraUslug').addEventListener('input', calcTotal);
+        calcTotal();
+
         document.getElementById('orderForm').addEventListener('submit', async function(e){
           e.preventDefault();
           const form = e.target;
@@ -190,8 +234,12 @@
             if (!emailRes.ok) throw new Error('Nie udało się wysłać zgłoszenia. Spróbuj ponownie albo napisz na usluga@projobiuro.pl.');
 
             const wariantValue = form.querySelector('input[name="Wariant"]:checked').value;
-            const priceMatch = wariantValue.match(/(\d+)\s*zł/);
-            const amountZl = priceMatch ? priceMatch[1] : null;
+            const amountZl = calcTotal();
+            const extraMieszk = parseInt(document.getElementById('extraMieszk').value, 10) || 0;
+            const extraUslug = parseInt(document.getElementById('extraUslug').value, 10) || 0;
+            let description = 'Wniosek o warunki zabudowy — ' + wariantValue;
+            if (extraMieszk > 0) description += ' + ' + extraMieszk + ' dod. budynek(i) mieszk./gosp. (+' + (extraMieszk*250) + ' zł)';
+            if (extraUslug > 0) description += ' + ' + extraUslug + ' dod. obiekt(y) usług. (+' + (extraUslug*500) + ' zł)';
             const email = form.querySelector('input[name="email"]').value;
             const name = form.querySelector('input[name="Imię i nazwisko"]').value;
 
@@ -202,7 +250,7 @@
             const payRes = await fetch('/.netlify/functions/create-payment', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ amountZl, description: 'Wniosek o warunki zabudowy — ' + wariantValue, email, name })
+              body: JSON.stringify({ amountZl: String(amountZl), description, email, name })
             });
             let payData = null;
             try { payData = await payRes.json(); } catch (jsonErr) { payData = null; }
@@ -299,5 +347,23 @@
   statEls.forEach(el=>statIo.observe(el));
 </script>
 
+
+<div id="cookieBanner" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:9999; background:#211c16; color:#fbf7ee; padding:16px 20px; font-family:'Poppins',sans-serif; font-size:14px; line-height:1.5; box-shadow:0 -2px 12px rgba(0,0,0,0.15);">
+  <div style="max-width:1000px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
+    <p style="margin:0; flex:1 1 320px;">
+      Ta strona nie używa ciasteczek śledzących ani reklamowych. Formularze kontaktowe przetwarzają Twoje dane zgodnie z
+      <a href="polityka-prywatnosci.html" style="color:#ffcc00; text-decoration:underline;">Polityką Prywatności</a>.
+    </p>
+    <button onclick="document.getElementById('cookieBanner').style.display='none'; localStorage.setItem('projo_cookie_ack','1');"
+      style="background:#ffcc00; color:#211c16; border:none; padding:10px 20px; border-radius:100px; font-weight:600; font-size:14px; cursor:pointer; white-space:nowrap;">
+      Rozumiem
+    </button>
+  </div>
+</div>
+<script>
+  if (!localStorage.getItem('projo_cookie_ack')) {
+    document.getElementById('cookieBanner').style.display = 'block';
+  }
+</script>
 </body>
 </html>

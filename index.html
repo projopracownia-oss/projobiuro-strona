@@ -222,6 +222,7 @@
     <div class="wrap hero-content">
       <span class="eyebrow" style="color:var(--yellow);">Biuro projektowe PROJO — Jarosław / Przemyśl / Przeworsk / zdalnie cała Polska</span>
       <h1>Projektuję obiekty,<br>które da się zbudować.</h1>
+      <p style="font-size:13px; color:rgba(251,247,238,0.65); margin-bottom:10px;">Biuro projektowe w Jarosławiu — projekty budynków, analiza działki, pozwolenie na budowę</p>
       <p class="hero-sub">Sprawdzam działkę, projektuję bryłę w Archicadzie i prowadzę dokumentację aż do decyzji o pozwoleniu na budowę. Jedna osoba odpowiada za każdy etap — od pierwszej rozmowy po ostatnią pieczątkę.</p>
       <div class="hero-btns">
         <a href="#kontakt" class="btn btn-fill">Zapytaj o wycenę</a>
@@ -363,6 +364,84 @@
     </div>
   </section>
 
+  <section id="faq" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Najczęstsze pytania</span>
+        <h2>To pytam mnie najczęściej</h2>
+      </div>
+      <div style="display:grid; gap:14px; max-width:760px;">
+        <div class="notice-block">
+          <h3>Kiedy dostanę pozwolenie na budowę?</h3>
+          <p>Ustawowo — 65 dni.</p>
+        </div>
+        <div class="notice-block">
+          <h3>Czy mogę coś zmienić w gotowym projekcie?</h3>
+          <p>Wykonuję adaptacje projektów i drobne rysunki zamienne. Jeśli skala zmian kwalifikuje się już pod rozbudowę czy przebudowę — odmawiam i proponuję projekt indywidualny.</p>
+        </div>
+        <div class="notice-block">
+          <h3>Czy pomagasz w formalnościach?</h3>
+          <p>Tak. Z pełnomocnictwem reprezentuję Cię w urzędach, więc nie musisz się tym martwić.</p>
+        </div>
+        <div class="notice-block">
+          <h3>Czy sprawdzasz działkę przed rozpoczęciem projektu?</h3>
+          <p>Tak. Analizuję warunki zabudowy lub MPZP, żeby sprawdzić, co można wybudować na Twojej działce.</p>
+        </div>
+        <div class="notice-block">
+          <h3>Ile kosztuje projekt?</h3>
+          <p>Cena zależy od zakresu i działki — przygotowuję indywidualną ofertę po analizie potrzeb.</p>
+        </div>
+        <div class="notice-block">
+          <h3>Czy można rozłożyć płatność?</h3>
+          <p>Tak — 30% zaliczki przy podpisaniu umowy, reszta według harmonogramu ustalonego w umowie.</p>
+        </div>
+        <div class="notice-block">
+          <h3>Czy odpowiadasz po godzinach pracy?</h3>
+          <p>Nie — po pracy jestem z rodziną. Zawsze wracam z odpowiedzią kolejnego dnia roboczego.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Kiedy dostanę pozwolenie na budowę?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Ustawowo — 65 dni." }
+      },
+      {
+        "@type": "Question",
+        "name": "Czy mogę coś zmienić w gotowym projekcie?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Wykonuję adaptacje projektów i drobne rysunki zamienne. Jeśli skala zmian kwalifikuje się już pod rozbudowę czy przebudowę, proponuję projekt indywidualny." }
+      },
+      {
+        "@type": "Question",
+        "name": "Czy pomagasz w formalnościach urzędowych?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Tak. Z pełnomocnictwem reprezentuję klienta w urzędach." }
+      },
+      {
+        "@type": "Question",
+        "name": "Czy sprawdzasz działkę przed rozpoczęciem projektu?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Tak. Analizowane są warunki zabudowy lub MPZP, aby sprawdzić, co można wybudować na danej działce." }
+      },
+      {
+        "@type": "Question",
+        "name": "Ile kosztuje projekt domu lub budynku?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Cena zależy od zakresu i działki — indywidualna oferta przygotowywana jest po analizie potrzeb klienta." }
+      },
+      {
+        "@type": "Question",
+        "name": "Czy można rozłożyć płatność za projekt?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Tak — 30% zaliczki przy podpisaniu umowy, reszta według harmonogramu ustalonego w umowie." }
+      }
+    ]
+  }
+  </script>
+
   <section style="padding-top:0;">
     <div class="wrap">
       <div class="newsletter">
@@ -449,5 +528,23 @@
   statEls.forEach(el=>statIo.observe(el));
 </script>
 
+
+<div id="cookieBanner" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:9999; background:#211c16; color:#fbf7ee; padding:16px 20px; font-family:'Poppins',sans-serif; font-size:14px; line-height:1.5; box-shadow:0 -2px 12px rgba(0,0,0,0.15);">
+  <div style="max-width:1000px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
+    <p style="margin:0; flex:1 1 320px;">
+      Ta strona nie używa ciasteczek śledzących ani reklamowych. Formularze kontaktowe przetwarzają Twoje dane zgodnie z
+      <a href="polityka-prywatnosci.html" style="color:#ffcc00; text-decoration:underline;">Polityką Prywatności</a>.
+    </p>
+    <button onclick="document.getElementById('cookieBanner').style.display='none'; localStorage.setItem('projo_cookie_ack','1');"
+      style="background:#ffcc00; color:#211c16; border:none; padding:10px 20px; border-radius:100px; font-weight:600; font-size:14px; cursor:pointer; white-space:nowrap;">
+      Rozumiem
+    </button>
+  </div>
+</div>
+<script>
+  if (!localStorage.getItem('projo_cookie_ack')) {
+    document.getElementById('cookieBanner').style.display = 'block';
+  }
+</script>
 </body>
 </html>

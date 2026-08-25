@@ -112,6 +112,7 @@
       <div class="about-text">
         <span class="eyebrow">Kto stoi za PROJO</span>
         <h1>Jedna osoba, pełna odpowiedzialność</h1>
+        <p style="font-size:13px; color:var(--ink-soft); margin-bottom:8px;">Jowita Urban — inżynier budownictwa i projektant w Jarosławiu</p>
         <p>Jestem magistrem inżynierem budownictwa z dziesięcioletnim doświadczeniem w zawodzie — pracowałam nad projektami od niewielkich budynków jednorodzinnych po hale przemysłowe, obiekty zabytkowe, użyteczności publicznej i gospodarcze.</p>
         <p>Biuro PROJO prowadzę samodzielnie, świadomie bez zespołu. Dzięki temu każdy projekt — od pierwszego szkicu po pieczątkę urzędu — przechodzi przez jedną głowę, a Ty zawsze rozmawiasz z tą samą osobą.</p>
         <p>Pracuję w Archicadzie, więc zanim cokolwiek ruszy na budowie, zobaczysz swoją inwestycję w 3D. Działam głównie w Jarosławiu, Przemyślu i Przeworsku, ale przy dobrej działce dogadamy się zdalnie gdziekolwiek w Polsce.</p>
@@ -215,5 +216,23 @@
   statEls.forEach(el=>statIo.observe(el));
 </script>
 
+
+<div id="cookieBanner" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:9999; background:#211c16; color:#fbf7ee; padding:16px 20px; font-family:'Poppins',sans-serif; font-size:14px; line-height:1.5; box-shadow:0 -2px 12px rgba(0,0,0,0.15);">
+  <div style="max-width:1000px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
+    <p style="margin:0; flex:1 1 320px;">
+      Ta strona nie używa ciasteczek śledzących ani reklamowych. Formularze kontaktowe przetwarzają Twoje dane zgodnie z
+      <a href="polityka-prywatnosci.html" style="color:#ffcc00; text-decoration:underline;">Polityką Prywatności</a>.
+    </p>
+    <button onclick="document.getElementById('cookieBanner').style.display='none'; localStorage.setItem('projo_cookie_ack','1');"
+      style="background:#ffcc00; color:#211c16; border:none; padding:10px 20px; border-radius:100px; font-weight:600; font-size:14px; cursor:pointer; white-space:nowrap;">
+      Rozumiem
+    </button>
+  </div>
+</div>
+<script>
+  if (!localStorage.getItem('projo_cookie_ack')) {
+    document.getElementById('cookieBanner').style.display = 'block';
+  }
+</script>
 </body>
 </html>

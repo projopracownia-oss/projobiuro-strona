@@ -211,6 +211,7 @@
     <div class="wrap">
       <span class="eyebrow">Sklep usług</span>
       <h1>Zamów usługę online — bez umowy na cały projekt</h1>
+      <p style="font-size:13px; color:var(--ink-soft); margin-bottom:8px;">Analiza działki i projekt budynku online — PROJO Jarosław</p>
       <p>Wybierasz usługę, płacisz online, dostajesz odpowiedź w PDF na e-mail. Trzy usługi możesz zamówić od razu.</p>
 
       <div class="prereq">
@@ -392,24 +393,26 @@
       <div class="section-head">
         <span class="eyebrow">Usługa 3</span>
         <h2>Wystąpienie o warunki zabudowy</h2>
-        <p>Jeśli dla Twojej działki nie obowiązuje miejscowy plan zagospodarowania przestrzennego, przygotowuję wniosek o decyzję o warunkach zabudowy (WZ). Wybierz jedną z dwóch opcji — obie obejmują przygotowanie wniosku, różnią się tym, kto zbiera do niego załączniki.</p>
+        <p>Jeśli dla Twojej działki nie obowiązuje miejscowy plan zagospodarowania przestrzennego, przygotowuję wniosek o decyzję o warunkach zabudowy (WZ). Ceny niżej dotyczą <b>jednego budynku mieszkalnego lub gospodarczego (do 200 m²)</b> na wniosku. Budynki usługowe, handlowe, przemysłowe i biurowe oraz dodatkowe budynki na tym samym wniosku wyceniam osobno — pełny cennik zobaczysz w formularzu zamówienia.</p>
       </div>
 
       <div class="packages">
         <div class="pkg">
           <h3>500 zł <span style="font-size:13px; font-weight:500; color:var(--ink-soft);">cena całkowita*</span></h3>
-          <p class="pkg-tag">Ty dostarczasz zapewnienia</p>
+          <p class="pkg-tag">Budynek mieszkalny/gospodarczy do 200 m² — Ty dostarczasz zapewnienia</p>
           <p class="pkg-for">Sam występujesz do gestorów sieci (prąd, woda, kanalizacja, gaz itd.) i dostarczasz mi gotowe zapewnienia potwierdzające możliwość przyłączenia. Ja na ich podstawie przygotowuję kompletny wniosek o decyzję WZ.</p>
           <a href="10_zamowienie-wz.html?wariant=500" class="btn btn-fill">Zamawiam ten wariant</a>
         </div>
 
         <div class="pkg">
           <h3>1000 zł <span style="font-size:13px; font-weight:500; color:var(--ink-soft);">cena całkowita*</span></h3>
-          <p class="pkg-tag">Ja zbieram załączniki</p>
+          <p class="pkg-tag">Budynek mieszkalny/gospodarczy do 200 m² — ja zbieram załączniki</p>
           <p class="pkg-for">To ja występuję do gestorów sieci o zapewnienia potwierdzające możliwość przyłączenia, kompletuję wszystkie załączniki i przygotowuję na ich podstawie wniosek o decyzję WZ.</p>
           <a href="10_zamowienie-wz.html?wariant=1000" class="btn btn-fill">Zamawiam ten wariant</a>
         </div>
       </div>
+
+      <p style="font-size:13.5px; color:var(--ink-soft); margin-top:16px;">Budynek usługowy, handlowy, przemysłowy lub biurowy: <b>1000 zł</b> bez zapewnień / <b>1500 zł</b> z zapewnieniami. Każdy dodatkowy budynek mieszkalny/gospodarczy na tym samym wniosku: <b>+250 zł</b>. Każdy dodatkowy obiekt usługowy/handlowy/przemysłowy/biurowy: <b>+500 zł</b>.</p>
 
       <div class="notice-block" style="margin-top:24px;">
         <h3>Pełnomocnictwo — dotyczy obu wariantów</h3>
@@ -510,5 +513,23 @@
   statEls.forEach(el=>statIo.observe(el));
 </script>
 
+
+<div id="cookieBanner" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:9999; background:#211c16; color:#fbf7ee; padding:16px 20px; font-family:'Poppins',sans-serif; font-size:14px; line-height:1.5; box-shadow:0 -2px 12px rgba(0,0,0,0.15);">
+  <div style="max-width:1000px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
+    <p style="margin:0; flex:1 1 320px;">
+      Ta strona nie używa ciasteczek śledzących ani reklamowych. Formularze kontaktowe przetwarzają Twoje dane zgodnie z
+      <a href="polityka-prywatnosci.html" style="color:#ffcc00; text-decoration:underline;">Polityką Prywatności</a>.
+    </p>
+    <button onclick="document.getElementById('cookieBanner').style.display='none'; localStorage.setItem('projo_cookie_ack','1');"
+      style="background:#ffcc00; color:#211c16; border:none; padding:10px 20px; border-radius:100px; font-weight:600; font-size:14px; cursor:pointer; white-space:nowrap;">
+      Rozumiem
+    </button>
+  </div>
+</div>
+<script>
+  if (!localStorage.getItem('projo_cookie_ack')) {
+    document.getElementById('cookieBanner').style.display = 'block';
+  }
+</script>
 </body>
 </html>

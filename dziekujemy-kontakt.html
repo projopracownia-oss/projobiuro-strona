@@ -25,5 +25,23 @@
   <p>Jeśli w ciągu 2 dni roboczych nie dostaniesz ode mnie odpowiedzi, sprawdź folder spam albo napisz bezpośrednio na kontakt@projobiuro.pl.</p>
   <a href="1_strona_glowna.html" class="btn">Wróć do strony głównej</a>
 </div>
+
+<div id="cookieBanner" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:9999; background:#211c16; color:#fbf7ee; padding:16px 20px; font-family:'Poppins',sans-serif; font-size:14px; line-height:1.5; box-shadow:0 -2px 12px rgba(0,0,0,0.15);">
+  <div style="max-width:1000px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
+    <p style="margin:0; flex:1 1 320px;">
+      Ta strona nie używa ciasteczek śledzących ani reklamowych. Formularze kontaktowe przetwarzają Twoje dane zgodnie z
+      <a href="polityka-prywatnosci.html" style="color:#ffcc00; text-decoration:underline;">Polityką Prywatności</a>.
+    </p>
+    <button onclick="document.getElementById('cookieBanner').style.display='none'; localStorage.setItem('projo_cookie_ack','1');"
+      style="background:#ffcc00; color:#211c16; border:none; padding:10px 20px; border-radius:100px; font-weight:600; font-size:14px; cursor:pointer; white-space:nowrap;">
+      Rozumiem
+    </button>
+  </div>
+</div>
+<script>
+  if (!localStorage.getItem('projo_cookie_ack')) {
+    document.getElementById('cookieBanner').style.display = 'block';
+  }
+</script>
 </body>
 </html>

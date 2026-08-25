@@ -211,6 +211,7 @@
     <div class="wrap">
       <span class="eyebrow">Sklep usług</span>
       <h1>Zamów usługę online — bez umowy na cały projekt</h1>
+      <p style="font-size:13px; color:var(--ink-soft); margin-bottom:8px;">Analiza działki i projekt budynku online — PROJO Jarosław</p>
       <p>Wybierasz usługę, płacisz online, dostajesz odpowiedź w PDF na e-mail. Trzy usługi możesz zamówić od razu.</p>
 
       <div class="prereq">
@@ -510,5 +511,23 @@
   statEls.forEach(el=>statIo.observe(el));
 </script>
 
+
+<div id="cookieBanner" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:9999; background:#211c16; color:#fbf7ee; padding:16px 20px; font-family:'Poppins',sans-serif; font-size:14px; line-height:1.5; box-shadow:0 -2px 12px rgba(0,0,0,0.15);">
+  <div style="max-width:1000px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
+    <p style="margin:0; flex:1 1 320px;">
+      Ta strona nie używa ciasteczek śledzących ani reklamowych. Formularze kontaktowe przetwarzają Twoje dane zgodnie z
+      <a href="polityka-prywatnosci.html" style="color:#ffcc00; text-decoration:underline;">Polityką Prywatności</a>.
+    </p>
+    <button onclick="document.getElementById('cookieBanner').style.display='none'; localStorage.setItem('projo_cookie_ack','1');"
+      style="background:#ffcc00; color:#211c16; border:none; padding:10px 20px; border-radius:100px; font-weight:600; font-size:14px; cursor:pointer; white-space:nowrap;">
+      Rozumiem
+    </button>
+  </div>
+</div>
+<script>
+  if (!localStorage.getItem('projo_cookie_ack')) {
+    document.getElementById('cookieBanner').style.display = 'block';
+  }
+</script>
 </body>
 </html>
