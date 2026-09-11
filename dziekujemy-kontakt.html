@@ -27,21 +27,66 @@
 </div>
 
 <div id="cookieBanner" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:9999; background:#211c16; color:#fbf7ee; padding:16px 20px; font-family:'Poppins',sans-serif; font-size:14px; line-height:1.5; box-shadow:0 -2px 12px rgba(0,0,0,0.15);">
-  <div style="max-width:1000px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
+  <div style="max-width:1100px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
     <p style="margin:0; flex:1 1 320px;">
-      Ta strona nie używa ciasteczek śledzących ani reklamowych. Formularze kontaktowe przetwarzają Twoje dane zgodnie z
-      <a href="polityka-prywatnosci.html" style="color:#ffcc00; text-decoration:underline;">Polityką Prywatności</a>.
+      Używamy plików cookie do analizy ruchu na stronie (Google Analytics) oraz zapewnienia poprawnego działania formularzy. Możesz zaakceptować lub odrzucić cookies analityczne — szczegóły w
+      <a href="polityka-prywatnosci.html" style="color:#ffcc00; text-decoration:underline;">Polityce Prywatności</a>.
     </p>
-    <button onclick="document.getElementById('cookieBanner').style.display='none'; localStorage.setItem('projo_cookie_ack','1');"
-      style="background:#ffcc00; color:#211c16; border:none; padding:10px 20px; border-radius:100px; font-weight:600; font-size:14px; cursor:pointer; white-space:nowrap;">
-      Rozumiem
-    </button>
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+      <button id="cookieReject"
+        style="background:transparent; color:#fbf7ee; border:1px solid #fbf7ee; padding:10px 20px; border-radius:100px; font-weight:600; font-size:14px; cursor:pointer; white-space:nowrap;">
+        Odrzucam
+      </button>
+      <button id="cookieAccept"
+        style="background:#ffcc00; color:#211c16; border:none; padding:10px 20px; border-radius:100px; font-weight:600; font-size:14px; cursor:pointer; white-space:nowrap;">
+        Akceptuję
+      </button>
+    </div>
   </div>
 </div>
 <script>
-  if (!localStorage.getItem('projo_cookie_ack')) {
-    document.getElementById('cookieBanner').style.display = 'block';
+(function(){
+  // ─────────────────────────────────────────────────────────────
+  // GOOGLE ANALYTICS — WŁĄCZENIE 10 WRZEŚNIA
+  // Wklej tu swój identyfikator pomiaru GA4 (np. "G-XXXXXXXXXX")
+  // Dopóki jest pusty, Analytics się nie ładuje — nawet po kliknięciu "Akceptuję".
+  // ─────────────────────────────────────────────────────────────
+  var GA_MEASUREMENT_ID = 'G-2FNY231B99'; // <-- WPISZ ID TUTAJ
+
+  function loadGoogleAnalytics(){
+    if (!GA_MEASUREMENT_ID) return;
+    if (window.gaLoaded) return;
+    window.gaLoaded = true;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function(){ dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
   }
+
+  var banner = document.getElementById('cookieBanner');
+  var consent = localStorage.getItem('projo_cookie_consent');
+
+  if (consent === 'accepted') {
+    loadGoogleAnalytics();
+  } else if (consent === null) {
+    banner.style.display = 'block';
+  }
+  // consent === 'rejected' → baner ukryty, Analytics się nie ładuje
+
+  document.getElementById('cookieAccept').addEventListener('click', function(){
+    localStorage.setItem('projo_cookie_consent', 'accepted');
+    banner.style.display = 'none';
+    loadGoogleAnalytics();
+  });
+  document.getElementById('cookieReject').addEventListener('click', function(){
+    localStorage.setItem('projo_cookie_consent', 'rejected');
+    banner.style.display = 'none';
+  });
+})();
 </script>
 </body>
 </html>
