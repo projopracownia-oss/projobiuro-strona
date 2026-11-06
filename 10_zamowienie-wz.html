@@ -385,8 +385,8 @@
 <p>Przygotuję kompletny wniosek o warunki zabudowy wraz z mapą zasadniczą i planem sytuacyjnym. Zapewnienia od gestorów sieci (prąd, woda, kanalizacja, gaz) możesz dostarczyć sama lub sam, a jeśli ich nie masz, zbieram je ja, w tej samej cenie.</p>
 <div class="hero-actions"><a href="#zamow" class="btn btn-fill">Przejdź do zamówienia</a></div></div></section>
 <section id="zamow" style="padding:0 0 64px;"><div class="wrap"><div class="ord">
-<form id="orderForm" action="https://formsubmit.co/usluga@projobiuro.pl" method="POST" enctype="multipart/form-data" class="ord-form">
-<input type="hidden" name="_subject" value="Nowe zamówienie: Wystąpienie o WZ"><input type="hidden" name="_template" value="table"><input type="hidden" name="_next" value="https://projobiuro.pl/8-dziekujemy.html"><input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+<form id="orderForm" name="zamowienie-wz" action="/8-dziekujemy.html" method="POST" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="_honey" class="ord-form">
+<input type="hidden" name="form-name" value="zamowienie-wz"><input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
 <div class="ord-sec"><h3><span class="sw-n">1</span>Budynki na wniosku</h3>
 <p class="hint" style="margin:0 0 14px; font-size:13px;">Cena 500 zł dotyczy jednego budynku. Jeśli na tej samej działce ma powstać więcej budynków lub obiektów budowlanych, wpisz ich liczbę. Każdy dodatkowy kosztuje 100 zł, bez znaczenia jego funkcja.</p>
 <div class="field"><label for="extraBudynki">Dodatkowe budynki lub obiekty budowlane</label><input type="number" name="Dodatkowe budynki" id="extraBudynki" min="0" value="0" style="max-width:140px;"></div></div>
@@ -397,7 +397,7 @@
 <p class="hint" style="margin:0 0 6px;"><b>Zapewnienia od gestorów sieci</b>, jeśli już je masz. Jeśli nie, zostaw puste: zbiorę je sama, a cena się nie zmieni.</p>
 <div style="margin:12px 0 22px;"><div class="file-slot"><input type="file" name="Zapewnienie gestora 1" accept=".pdf,.jpg,.jpeg,.png"></div><div class="file-slot"><input type="file" name="Zapewnienie gestora 2" accept=".pdf,.jpg,.jpeg,.png"></div><div class="file-slot"><input type="file" name="Zapewnienie gestora 3" accept=".pdf,.jpg,.jpeg,.png"></div></div>
 <p class="hint" style="margin:0 0 6px;"><b>Dodatkowe załączniki</b>, na przykład mapa, szkice albo wcześniejsze decyzje.</p>
-<div style="margin-top:12px;"><div class="file-slot"><input type="file" name="Dodatkowy załącznik 1" accept=".pdf,.jpg,.jpeg,.png"></div><div class="file-slot"><input type="file" name="Dodatkowy załącznik 2" accept=".pdf,.jpg,.jpeg,.png"></div><div class="file-slot"><input type="file" name="Dodatkowy załącznik 3" accept=".pdf,.jpg,.jpeg,.png"></div><p class="hint">Pliki PDF, JPG lub PNG, łącznie do 10 MB.</p></div></div>
+<div style="margin-top:12px;"><div class="file-slot"><input type="file" name="Dodatkowy załącznik 1" accept=".pdf,.jpg,.jpeg,.png"></div><div class="file-slot"><input type="file" name="Dodatkowy załącznik 2" accept=".pdf,.jpg,.jpeg,.png"></div><div class="file-slot"><input type="file" name="Dodatkowy załącznik 3" accept=".pdf,.jpg,.jpeg,.png"></div><p class="hint">Pliki PDF, JPG lub PNG, łącznie do 7 MB.</p></div></div>
 <div class="ord-sec"><h3><span class="sw-n">4</span>Twoje dane</h3>
 <div class="form-grid-2"><div class="field"><label for="f-im">Imię i nazwisko *</label><input id="f-im" type="text" name="Imię i nazwisko" autocomplete="name" required></div><div class="field"><label for="f-em">Adres e-mail *</label><input id="f-em" type="email" name="email" autocomplete="email" required></div></div>
 <p class="hint" style="margin-top:18px; font-size:13px;">Jeśli podpiszesz mi pełnomocnictwo, sama składam dokumenty i prowadzę sprawę w urzędzie. Bez pełnomocnictwa dostajesz gotowe dokumenty i składasz je samodzielnie.</p>
@@ -458,13 +458,12 @@
 </script><script>
 function sendOrder(form, btn, buildPayment){
   let total=0; form.querySelectorAll('input[type=file]').forEach(f=>{ if(f.files) for(const x of f.files) total+=x.size; });
-  if(total>10*1024*1024){ alert('Łączny rozmiar załączników przekracza 10 MB. Zmniejsz pliki albo wyślij część z nich na kontakt@projobiuro.pl.'); return; }
+  if(total>7*1024*1024){ alert('Łączny rozmiar załączników przekracza 7 MB. Zmniejsz pliki albo wyślij część z nich na kontakt@projobiuro.pl.'); return; }
   const originalText=btn.textContent; btn.disabled=true; btn.textContent='Wysyłam...';
   return (async()=>{
     try{
       const formData=new FormData(form);
-      const emailAction=form.getAttribute('action').replace('https://formsubmit.co/','https://formsubmit.co/ajax/');
-      const emailRes=await fetch(emailAction,{method:'POST',body:formData,headers:{'Accept':'application/json'}});
+      const emailRes=await fetch('/',{method:'POST',body:formData});
       if(!emailRes.ok) throw new Error('Nie udało się wysłać zgłoszenia. Spróbuj ponownie albo napisz na usluga@projobiuro.pl.');
       const email=form.querySelector('input[name="email"]').value;
       const name=form.querySelector('input[name="Imię i nazwisko"]').value;

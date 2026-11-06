@@ -377,10 +377,8 @@
       <div class="form-card" id="b2b">
         <h3>Opisz swój projekt</h3>
         <p>Im więcej szczegółów, tym szybciej i konkretniej odpowiem.</p>
-        <form action="https://formsubmit.co/kontakt@projobiuro.pl" method="POST">
-          <input type="hidden" name="_subject" value="Nowe zapytanie ze strony kontaktowej">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_next" value="https://projobiuro.pl/dziekujemy-kontakt.html">
+        <form name="kontakt" method="POST" action="/dziekujemy-kontakt.html" data-netlify="true" netlify-honeypot="_honey">
+          <input type="hidden" name="form-name" value="kontakt">
           <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
           <div class="form-grid">
             <div class="field"><label for="f-imie">Imię i nazwisko *</label><input id="f-imie" type="text" name="Imię i nazwisko" autocomplete="name" required></div>

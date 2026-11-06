@@ -390,8 +390,8 @@
 <div class="sw-grid four"><div class="sw-card"><span class="sw-n">1</span><p>Wypełniasz formularz, podajesz dane działki i wpisujesz maksymalnie 4 pytania.</p></div><div class="sw-card"><span class="sw-n">2</span><p>Przekazujesz potrzebne dokumenty, jeśli są wymagane do udzielenia odpowiedzi.</p></div><div class="sw-card"><span class="sw-n">3</span><p>Sprawdzam wskazane zagadnienia i przygotowuję odpowiedzi.</p></div><div class="sw-card"><span class="sw-n">4</span><p>Otrzymujesz PDF na swój adres e-mail.</p></div></div></div></section>
 <section style="padding:0 0 40px;"><div class="wrap"><div class="note-box"><p><b>Ważne:</b> Każde pytanie może dotyczyć jednego konkretnego zagadnienia. Usługa nie obejmuje kompleksowej analizy możliwości zabudowy działki, sprawdzania całego projektu domu pod kątem zgodności z MPZP lub WZ, opracowywania koncepcji ani projektowania.</p><p>Jeżeli pytanie będzie wymagało szerszego opracowania, poinformuję Cię o tym przed rozpoczęciem pracy.</p></div></div></section>
 <section id="zamow" style="padding:0 0 64px;"><div class="wrap"><div class="ord">
-<form id="orderForm" action="https://formsubmit.co/usluga@projobiuro.pl" method="POST" enctype="multipart/form-data" class="ord-form">
-<input type="hidden" name="_subject" value="Nowe zamówienie: Szybki Skan działki"><input type="hidden" name="_template" value="table"><input type="hidden" name="_next" value="https://projobiuro.pl/8-dziekujemy.html"><input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+<form id="orderForm" name="zamowienie-skan" action="/8-dziekujemy.html" method="POST" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="_honey" class="ord-form">
+<input type="hidden" name="form-name" value="zamowienie-skan"><input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
 <div class="ord-sec"><h3><span class="sw-n">1</span>Twoja działka</h3>
 <div class="form-grid-2"><div class="field"><label for="f-dz">Numer działki *</label><input id="f-dz" type="text" name="Numer działki" required></div><div class="field"><label for="f-ob">Obręb ewidencyjny *</label><input id="f-ob" type="text" name="Obręb ewidencyjny" required></div><div class="field"><label for="f-gm">Gmina *</label><input id="f-gm" type="text" name="Gmina" required></div><div class="field"><label for="f-ln">Link do lokalizacji lub mapy</label><input id="f-ln" type="text" name="Link do lokalizacji" placeholder="np. link do Geoportalu"></div></div></div>
 <div class="ord-sec"><h3><span class="sw-n">2</span>Twoje pytania</h3>
@@ -401,7 +401,7 @@
 <div class="field"><label for="f-q3">Pytanie 3</label><input id="f-q3" type="text" name="Pytanie 3"></div>
 <div class="field"><label for="f-q4">Pytanie 4</label><input id="f-q4" type="text" name="Pytanie 4"></div></div>
 <div class="ord-sec"><h3><span class="sw-n">3</span>Dokumenty (opcjonalnie)</h3>
-<p class="hint" style="margin:0 0 14px;">Na przykład wypis z MPZP albo decyzja o warunkach zabudowy. Możesz dodać do 4 plików (PDF, JPG, PNG), łącznie do 10 MB. Jeśli czegoś zabraknie, odezwę się, zanim zacznę pracę.</p>
+<p class="hint" style="margin:0 0 14px;">Na przykład wypis z MPZP albo decyzja o warunkach zabudowy. Możesz dodać do 4 plików (PDF, JPG, PNG), łącznie do 7 MB. Jeśli czegoś zabraknie, odezwę się, zanim zacznę pracę.</p>
 <div class="file-slot"><input type="file" name="Dokument 1" accept=".pdf,.jpg,.jpeg,.png"></div><div class="file-slot"><input type="file" name="Dokument 2" accept=".pdf,.jpg,.jpeg,.png"></div><div class="file-slot"><input type="file" name="Dokument 3" accept=".pdf,.jpg,.jpeg,.png"></div><div class="file-slot"><input type="file" name="Dokument 4" accept=".pdf,.jpg,.jpeg,.png"></div></div>
 <div class="ord-sec"><h3><span class="sw-n">4</span>Twoje dane</h3>
 <div class="form-grid-2"><div class="field"><label for="f-im">Imię i nazwisko *</label><input id="f-im" type="text" name="Imię i nazwisko" autocomplete="name" required></div><div class="field"><label for="f-em">Adres e-mail *</label><input id="f-em" type="email" name="email" autocomplete="email" required></div></div>
@@ -459,13 +459,12 @@
 </script><script>
 function sendOrder(form, btn, buildPayment){
   let total=0; form.querySelectorAll('input[type=file]').forEach(f=>{ if(f.files) for(const x of f.files) total+=x.size; });
-  if(total>10*1024*1024){ alert('Łączny rozmiar załączników przekracza 10 MB. Zmniejsz pliki albo wyślij część z nich na kontakt@projobiuro.pl.'); return; }
+  if(total>7*1024*1024){ alert('Łączny rozmiar załączników przekracza 7 MB. Zmniejsz pliki albo wyślij część z nich na kontakt@projobiuro.pl.'); return; }
   const originalText=btn.textContent; btn.disabled=true; btn.textContent='Wysyłam...';
   return (async()=>{
     try{
       const formData=new FormData(form);
-      const emailAction=form.getAttribute('action').replace('https://formsubmit.co/','https://formsubmit.co/ajax/');
-      const emailRes=await fetch(emailAction,{method:'POST',body:formData,headers:{'Accept':'application/json'}});
+      const emailRes=await fetch('/',{method:'POST',body:formData});
       if(!emailRes.ok) throw new Error('Nie udało się wysłać zgłoszenia. Spróbuj ponownie albo napisz na usluga@projobiuro.pl.');
       const email=form.querySelector('input[name="email"]').value;
       const name=form.querySelector('input[name="Imię i nazwisko"]').value;
