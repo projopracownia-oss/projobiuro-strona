@@ -1,5 +1,15 @@
 const crypto = require('crypto');
 
+// Cennik po stronie serwera. Kwota nie pochodzi z przeglądarki, więc nikt jej nie zmieni.
+function priceFor(service, extra) {
+  if (service === 'skan') return 199;
+  if (service === 'wz') {
+    const x = Math.max(0, Math.min(50, parseInt(extra, 10) || 0));
+    return 500 + x * 100;
+  }
+  return null;
+}
+
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
@@ -7,16 +17,17 @@ exports.handler = async (event) => {
 
   try {
     const body = JSON.parse(event.body);
-    const { amountZl, description, email, name } = body;
+    const { service, extra, description, email, name } = body;
 
+    const amountZl = priceFor(service, extra);
     if (!amountZl || !description || !email) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ error: 'Brak wymaganych danych (kwota, opis lub e-mail).' }),
+        body: JSON.stringify({ error: 'Brak wymaganych danych (usługa, opis lub e-mail).' }),
       };
     }
 
-    const amount = Math.round(parseFloat(amountZl) * 100); // Przelewy24 przyjmuje kwotę w groszach
+    const amount = Math.round(amountZl * 100); // Przelewy24 przyjmuje kwotę w groszach
     const merchantId = parseInt(process.env.P24_MERCHANT_ID, 10);
     const posId = parseInt(process.env.P24_POS_ID, 10);
     const apiKey = process.env.P24_API_KEY;
@@ -43,7 +54,7 @@ exports.handler = async (event) => {
       sessionId,
       amount,
       currency: 'PLN',
-      description,
+      description: String(description).slice(0, 1024),
       email,
       client: name || '',
       country: 'PL',
@@ -70,7 +81,7 @@ exports.handler = async (event) => {
       console.error('P24 register failed:', p24res.status, JSON.stringify(data));
       return {
         statusCode: 502,
-        body: JSON.stringify({ error: 'Przelewy24 odrzuciło rejestrację płatności.', details: data }),
+        body: JSON.stringify({ error: 'Przelewy24 odrzuciło rejestrację płatności.' }),
       };
     }
 
@@ -82,9 +93,10 @@ exports.handler = async (event) => {
       body: JSON.stringify({ url: paymentUrl }),
     };
   } catch (err) {
+    console.error(err);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Błąd serwera przy rejestracji płatności.', message: err.message }),
+      body: JSON.stringify({ error: 'Błąd serwera przy rejestracji płatności.' }),
     };
   }
 };
